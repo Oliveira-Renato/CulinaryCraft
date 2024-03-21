@@ -4,7 +4,8 @@ import { styles } from "./styles";
 export default function Index() {
   return (
     <View style={styles.container}>
-      <Text>React Native na prática!</Text>
+      <Text style={styles.title}>Escolha os produtos</Text>
+      <Text style={styles.subtitle}>Descubra receitas baseadas nos produtos que você escolheu.</Text>
     </View>
   )
 }
