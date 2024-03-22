@@ -13,10 +13,18 @@ export const styles = StyleSheet.create({
     gap: 6
   },
   image: {
+    width: 16,
+    height: 16,
     marginBottom: 2
   },
   title: {
     color: theme.colors.black,
-    fontSize: theme.fonts.size.body.md,
+    fontSize: theme.fonts.size.body.sm,
+    fontFamily: theme.fonts.family.medium
+  },
+  selected: {
+    borderWidth: 2,
+    borderColor: theme.colors.green_600,
+    backgroundColor: theme.colors.green_100
   }
 }) 
