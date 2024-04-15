@@ -2,6 +2,8 @@ import { ScrollView } from "react-native"
 import { styles } from "./styles"
 import { Ingredient } from "../ingredient"
 import { useState } from "react"
+import { SequencedTransition } from "react-native-reanimated"
+import { Selected } from "../selected"
 
 export function Ingredients() {
   const [selected, setSelected] = useState<string[]>([])
@@ -12,7 +14,10 @@ export function Ingredients() {
     }
 
     setSelected((state) => [...state, value])
-    console.log(selected)
+  }
+
+  const handleClearSelected = () => {
+    setSelected([])
   }
 
   return (
@@ -24,6 +29,12 @@ export function Ingredients() {
           selected={selected.includes(String(index))}
           onPress={() => handleToggleSelected(String(index))} />
       ))}
+
+      <Selected
+        quantity={selected.length}
+        onClear={handleClearSelected}
+        onSearch={() => { }}
+      />
     </ScrollView>
   )
 } 

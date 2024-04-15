@@ -4,7 +4,8 @@ import { theme } from "@/theme"
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24
+    padding: 24,
+    backgroundColor: "red"
   },
   title: {
     fontSize: theme.fonts.size.heading.xl,
