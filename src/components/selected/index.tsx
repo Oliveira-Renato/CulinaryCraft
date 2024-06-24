@@ -4,6 +4,7 @@ import { MaterialIcons } from "@expo/vector-icons"
 
 import { styles } from "./styles"
 import { theme } from "@/theme"
+import { Button } from "../Button"
 
 type SelectedProps = {
   quantity: number
@@ -13,11 +14,13 @@ type SelectedProps = {
 
 export function Selected({ quantity, onClear, onSearch }: SelectedProps) {
   return (
-    <Animated.View style={styles.container} entering={SlideInDown} exiting={SlideOutDown}>
+    <Animated.View style={styles.container} entering={SlideInDown.duration(500)} exiting={SlideOutDown.duration(500)}>
       <View style={styles.header}>
         <Text style={styles.label}>{quantity} ingredientes selecionados.</Text>
         <MaterialIcons name="close" size={24} onPress={onClear} color={theme.colors.gray_400} />
-      </View> 
+      </View>
+
+      <Button title="Encontrar" onPress={onSearch} /> 
     </Animated.View>
   )
 }
