@@ -33,11 +33,15 @@ export function Ingredients() {
           onPress={() => handleToggleSelected(String(index))} />
       ))}
 
-      <Selected
-        quantity={selected.length}
-        onClear={handleClearSelected}
-        onSearch={() => { }}
-      />
+      {
+        selected.length > 0 && (
+          <Selected
+          quantity={selected.length}
+          onClear={handleClearSelected}
+          onSearch={() => { }}
+        />
+        )
+      }
     </ScrollView>
   )
 } 

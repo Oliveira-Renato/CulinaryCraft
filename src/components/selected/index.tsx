@@ -1,4 +1,4 @@
-import Animated from "react-native-reanimated"
+import Animated, {SlideInDown, SlideOutDown} from "react-native-reanimated"
 import { Text, View } from "react-native"
 import { MaterialIcons } from "@expo/vector-icons"
 
@@ -13,7 +13,7 @@ type SelectedProps = {
 
 export function Selected({ quantity, onClear, onSearch }: SelectedProps) {
   return (
-    <Animated.View style={styles.container}>
+    <Animated.View style={styles.container} entering={SlideInDown} exiting={SlideOutDown}>
       <View style={styles.header}>
         <Text style={styles.label}>{quantity} ingredientes selecionados.</Text>
         <MaterialIcons name="close" size={24} onPress={onClear} color={theme.colors.gray_400} />
