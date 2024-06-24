@@ -1,4 +1,4 @@
-import { ScrollView } from "react-native"
+import { Alert, ScrollView } from "react-native"
 import { styles } from "./styles"
 import { Ingredient } from "../ingredient"
 import { useState } from "react"
@@ -17,7 +17,10 @@ export function Ingredients() {
   }
 
   const handleClearSelected = () => {
-    setSelected([])
+    Alert.alert("Limpar", "Deseja limpar tudo?", [
+      { text: "Não", style: "cancel"},
+      { text: "Sim", onPress: () => setSelected([])}
+    ])
   }
 
   return (

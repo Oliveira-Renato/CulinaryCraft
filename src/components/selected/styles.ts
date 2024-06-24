@@ -8,7 +8,8 @@ export const styles = StyleSheet.create({
     borderRadius: theme.borderRadius.lg,
     position: "absolute",
     bottom: 24,
-    alignSelf: "center"
+    width: "100%",
+    alignSelf: "center",
   },
   header: {
     flexDirection: "row",

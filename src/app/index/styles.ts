@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    backgroundColor: "red"
+    backgroundColor: theme.colors.white
   },
   title: {
     fontSize: theme.fonts.size.heading.xl,
