@@ -1,10 +1,10 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
     flexWrap: "wrap",
+    justifyContent: "flex-start",
     flexDirection: "row",
-    paddingBottom: 200,
-    gap: 12
+    gap: 10,
   },
-}) 
+});

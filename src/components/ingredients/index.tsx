@@ -9,6 +9,7 @@ import { services } from "@/services";
 
 export function Ingredients() {
   const [selected, setSelected] = useState<string[]>([]);
+  const [ingredients, setIngredients] = useState<IngredientsResponse[]>([]);
 
   const handleToggleSelected = (value: string) => {
     if (selected.includes(value)) {
@@ -30,7 +31,7 @@ export function Ingredients() {
   };
 
   useEffect(() => {
-    services.ingredients.findsAll().then(console.log);
+    services.ingredients.findsAll().then(setIngredients);
   }, []);
 
   return (
@@ -38,13 +39,13 @@ export function Ingredients() {
       contentContainerStyle={styles.container}
       showsVerticalScrollIndicator={false}
     >
-      {Array.from({ length: 100 }).map((item, index) => (
+      {ingredients.map((item, index) => (
         <Ingredient
-          key={index}
-          name="Maça"
-          image=""
-          selected={selected.includes(String(index))}
-          onPress={() => handleToggleSelected(String(index))}
+          key={item.id}
+          name={item.name}
+          image={`${services.storage.imagePath}/${item.image}`}
+          selected={selected.includes(item.id)}
+          onPress={() => handleToggleSelected(item.id)}
         />
       ))}
 
