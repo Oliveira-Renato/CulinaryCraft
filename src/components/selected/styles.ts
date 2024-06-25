@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     padding: 24,
     borderRadius: theme.borderRadius.lg,
     position: "absolute",
-    bottom: 24,
+    bottom: "-35%",
     width: "100%",
     alignSelf: "center",
   },
@@ -15,11 +15,11 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 34
+    marginBottom: 34,
   },
   label: {
     color: theme.colors.white,
     fontSize: theme.fonts.size.body.sm,
-    fontFamily: theme.fonts.family.regular
-  }
-})
+    fontFamily: theme.fonts.family.regular,
+  },
+});
