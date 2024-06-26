@@ -1,61 +1,28 @@
-import { Alert, ScrollView } from "react-native";
-import { router } from "expo-router";
+import { ScrollView } from "react-native";
 import { styles } from "./styles";
-import { Ingredient } from "../ingredient";
-import { useEffect, useState } from "react";
-import { SequencedTransition } from "react-native-reanimated";
-import { Selected } from "../selected";
+import { Ingredient, IngredientsProps } from "../ingredient";
 import { services } from "@/services";
 
-export function Ingredients() {
-  const [selected, setSelected] = useState<string[]>([]);
-  const [ingredients, setIngredients] = useState<IngredientsResponse[]>([]);
+type Props = {
+  ingredients?: IngredientsProps[];
+};
 
-  const handleToggleSelected = (value: string) => {
-    if (selected.includes(value)) {
-      return setSelected((state) => state.filter((item) => item !== value));
-    }
-
-    setSelected((state) => [...state, value]);
-  };
-
-  const handleClearSelected = () => {
-    Alert.alert("Limpar", "Deseja limpar tudo?", [
-      { text: "Não", style: "cancel" },
-      { text: "Sim", onPress: () => setSelected([]) },
-    ]);
-  };
-
-  const handleSearch = () => {
-    router.navigate("/recipes/" + selected);
-  };
-
-  useEffect(() => {
-    services.ingredients.findsAll().then(setIngredients);
-  }, []);
-
+export function Ingredients({ ingredients }: Props) {
   return (
     <ScrollView
-      contentContainerStyle={styles.container}
-      showsVerticalScrollIndicator={false}
+      horizontal
+      style={styles.container}
+      contentContainerStyle={styles.ingredientsContent}
+      showsHorizontalScrollIndicator={false}
     >
-      {ingredients.map((item, index) => (
-        <Ingredient
-          key={item.id}
-          name={item.name}
-          image={`${services.storage.imagePath}/${item.image}`}
-          selected={selected.includes(item.id)}
-          onPress={() => handleToggleSelected(item.id)}
-        />
-      ))}
-
-      {selected.length > 0 && (
-        <Selected
-          quantity={selected.length}
-          onClear={handleClearSelected}
-          onSearch={handleSearch}
-        />
-      )}
+      {ingredients &&
+        ingredients.map((item, index) => (
+          <Ingredient
+            key={item.name}
+            name={item.name}
+            image={`${services.storage.imagePath}/${item.image}`}
+          />
+        ))}
     </ScrollView>
   );
 }

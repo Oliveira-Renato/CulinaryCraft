@@ -3,13 +3,20 @@ import { styles } from "./styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import { Recipe } from "@/components/Recipe";
+import { useEffect, useState } from "react";
+import { services } from "@/services";
+import { Ingredients } from "@/components/ingredients";
 
 export default function Recipes() {
+  const [ingredients, setIngredients] = useState<IngredientResponse[]>([]);
   const params = useLocalSearchParams<{ ingredientsIds: string }>();
-  const ingredientesIds =
-    params.ingredientsIds && params.ingredientsIds.split(",");
+  const ingredientesIds = params.ingredientsIds
+    ? params.ingredientsIds.split(",")
+    : [];
 
-  console.warn(params);
+  useEffect(() => {
+    services.ingredients.findByIds(ingredientesIds).then(setIngredients);
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -22,6 +29,8 @@ export default function Recipes() {
 
         <Text style={styles.title}>Ingredientes</Text>
       </View>
+
+      <Ingredients ingredients={ingredients} />
 
       <FlatList
         data={["1"]}

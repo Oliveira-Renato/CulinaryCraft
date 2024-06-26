@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     padding: 24,
     borderRadius: theme.borderRadius.lg,
     position: "absolute",
-    bottom: "-35%",
+    bottom: 18,
     width: "100%",
     alignSelf: "center",
   },
