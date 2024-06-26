@@ -6,9 +6,11 @@ import { Recipe } from "@/components/Recipe";
 import { useEffect, useState } from "react";
 import { services } from "@/services";
 import { Ingredients } from "@/components/ingredients";
+import { useIngredientsContext } from "@/context/IngredientsContext";
 
 export default function Recipes() {
-  const [ingredients, setIngredients] = useState<IngredientResponse[]>([]);
+  const { ingredients, setIngredients } = useIngredientsContext();
+  const [recipes, setRecipes] = useState<RecipeResponse[]>([]);
   const params = useLocalSearchParams<{ ingredientsIds: string }>();
   const ingredientesIds = params.ingredientsIds
     ? params.ingredientsIds.split(",")
@@ -16,6 +18,10 @@ export default function Recipes() {
 
   useEffect(() => {
     services.ingredients.findByIds(ingredientesIds).then(setIngredients);
+  }, []);
+
+  useEffect(() => {
+    services.recipes.findByIngredientsIds(ingredientesIds).then(setRecipes);
   }, []);
 
   return (
@@ -33,18 +39,23 @@ export default function Recipes() {
       <Ingredients ingredients={ingredients} />
 
       <FlatList
-        data={["1"]}
-        keyExtractor={(item) => item}
-        renderItem={() => (
+        data={recipes}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
           <Recipe
             recipe={{
-              name: "Omelete",
-              image:
-                "https://www.kitano.com.br/wp-content/uploads/2019/07/SSP_1993-Omelete-de-pizza-mussarela-ore%E2%95%A0%C3%BCgano-e-tomate.jpg",
-              minutes: 10,
+              name: item.name,
+              image: item.image,
+              minutes: item.minutes,
             }}
+            onPress={() => router.navigate("/recipe/" + item.id)}
           />
         )}
+        style={styles.recipes}
+        contentContainerStyle={styles.recipesContent}
+        showsVerticalScrollIndicator={false}
+        columnWrapperStyle={{ gap: 16 }}
+        numColumns={2}
       />
     </View>
   );

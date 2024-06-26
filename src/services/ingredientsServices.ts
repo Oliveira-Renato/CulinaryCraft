@@ -1,4 +1,4 @@
-import { supabase } from "./supabase"
+import { supabase } from "./supabase";
 
 async function findByIds(ids: string[]) {
   const { data } = await supabase
@@ -6,9 +6,9 @@ async function findByIds(ids: string[]) {
     .select()
     .in("id", ids)
     .order("name")
-    .returns<IngredientResponse[]>()
+    .returns<IngredientResponse[]>();
 
-  return data ?? []
+  return data ?? [];
 }
 
 async function findByRecipeId(id: string) {
@@ -16,9 +16,9 @@ async function findByRecipeId(id: string) {
     .from("recipes_ingredients")
     .select("ingredients (id, name, image)")
     .eq("recipe_id", id)
-    .returns<{ ingredients: IngredientResponse }[]>()
+    .returns<{ ingredients: IngredientResponse }[]>();
 
-  return data ? data.map((item) => item.ingredients) : []
+  return data ? data.map((item) => item.ingredients) : [];
 }
 
 async function findAll() {
@@ -26,9 +26,9 @@ async function findAll() {
     .from("ingredients")
     .select()
     .order("name")
-    .returns<IngredientResponse[]>()
+    .returns<IngredientResponse[]>();
 
-  return data ?? []
+  return data ?? [];
 }
 
-export { findAll, findByIds, findByRecipeId }
+export { findAll, findByIds, findByRecipeId };
